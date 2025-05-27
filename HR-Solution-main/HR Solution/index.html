@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HR Solution</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Estilo adicional embutido para demonstração */
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin: 20px 0;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.6s ease-out;
+    }
+    .reveal-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .hero {
+      background: linear-gradient(-45deg, #c7d2fe, #e0e7ff, #dbeafe, #f0f9ff);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      padding: 40px 20px;
+      border-radius: 10px;
+      margin: 40px 0;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .whatsapp {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25d366;
+      color: white;
+      padding: 15px 20px;
+      border-radius: 50%;
+      font-size: 24px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+      z-index: 100;
+      text-decoration: none;
+    }
+    .whatsapp:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="LOGO HR.jpg" alt="Logo da HR Solution" />
+    <h1>HR Solution</h1>
+    <p>Soluções Inteligentes em Recursos Humanos</p>
+  </header>
+
+  <nav>
+    <a href="#sobre">Sobre</a>
+    <a href="#carousel">Certificações</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#contato">Contato</a>
+  </nav>
+
+  <section id="sobre" class="reveal">
+    <h2>Sobre a HR Solution</h2>
+    <div class="hero">
+      <p>A HR Solution é uma empresa especializada em consultoria e soluções em Recursos Humanos. Nosso foco é conectar pessoas, otimizar processos e transformar o RH das empresas em um setor estratégico e eficiente.</p>
+      <div class="imagem-container">
+        <img src="Consultoria Certificada Mapa HDS.png" alt="Consultoria Certificada Mapa HDS" />
+      </div>
+    </div>
+  </section>
+
+  <section id="carousel" class="reveal">
+    <h2>Certificações e Identidade</h2>
+    <div class="carousel">
+      <div class="slides">
+        <img src="LOGO HR.jpg" alt="Logo da HR Solution" />
+        <img src="Consultoria Certificada Mapa HDS.png" alt="Certificado 1" />
+        <img src="Consultoria Certificada Mapa HDS (1).png" alt="Certificado 2" />
+      </div>
+      <button class="prev">&#10094;</button>
+      <button class="next">&#10095;</button>
+    </div>
+  </section>
+
+  <section id="servicos" class="reveal">
+    <h2>Serviços Oferecidos</h2>
+    <div class="card">Recrutamento e Seleção</div>
+    <div class="card">Treinamento e Desenvolvimento</div>
+    <div class="card">Consultoria em Gestão de Pessoas</div>
+    <div class="card">Clima Organizacional</div>
+    <div class="card">Plano de Cargos e Salários</div>
+    <div class="imagem-container">
+      <img src="Consultoria Certificada Mapa HDS (1).png" alt="Consultoria Certificada Mapa HDS" />
+    </div>
+  </section>
+
+  <section id="contato" class="reveal">
+    <h2>Entre em Contato</h2>
+    <p>Fale conosco por WhatsApp ou e-mail para mais informações ou para solicitar uma proposta.</p>
+    <div class="buttons">
+      <a href="https://wa.me/5511999999999" target="_blank" class="btn btn-whatsapp">Fale no WhatsApp</a>
+      <a href="mailto:contato@hrsolution.com.br" class="btn btn-email">Envie um E-mail</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 HR Solution. Todos os direitos reservados.</p>
+  </footer>
+
+  <a href="https://wa.me/5511999999999" class="whatsapp" target="_blank">💬</a>
+
+  <script>
+    // Carrossel
+    const slides = document.querySelector('.slides');
+    const images = document.querySelectorAll('.slides img');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+
+    let index = 0;
+
+    function showSlide(i) {
+      if (i < 0) index = images.length - 1;
+      else if (i >= images.length) index = 0;
+      else index = i;
+      slides.style.transform = `translateX(${-index * 100}%)`;
+    }
+
+    prevBtn.addEventListener('click', () => showSlide(index - 1));
+    nextBtn.addEventListener('click', () => showSlide(index + 1));
+
+    setInterval(() => showSlide(index + 1), 6000);
+
+    // Scroll Reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('reveal-visible');
+        }
+      });
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
